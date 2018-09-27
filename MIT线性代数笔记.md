@@ -1,6 +1,6 @@
 # MIT线性代数笔记
 - [第1课-方程组的几何解释](#第1课-方程组的几何解释)  
-- [第1课-矩阵消元](#第1课-矩阵消元)  
+- [第2课-矩阵消元](#第2课-矩阵消元)  
 - [第3课-矩阵乘法和可逆矩阵](#第3课-矩阵乘法和可逆矩阵)  
 
 
@@ -10,8 +10,8 @@
 
 有如下方程组
 $$
-\label 1
-\left\{ \begin{array}
+\tag 1
+\left \{ \begin{array}
 2x-y&=0\\
 -x +2y&=3
 \end{array}
@@ -22,7 +22,7 @@ $$
 - **行图像**
   $$
   \label 2
-  \begin{bmatrix}-2 & -1 \\-1 & 2 \end{bmatrix}\begin{bmatrix}x\\y \end{bmatrix}=\begin{bmatrix}0  \\3 \end{bmatrix}
+  \begin{bmatrix}-2 & -1 \\ -1 & 2 \end{bmatrix}\begin{bmatrix}x \\ y \end{bmatrix}=\begin{bmatrix}0  \\ 3 \end{bmatrix}
   $$
   可以看做$Ax=b$ 即:
 
@@ -35,16 +35,16 @@ $$
   看成列向量的线性组合：
   $$
   \label 3
-  x\begin{bmatrix}2\\-1\end{bmatrix}+y\begin{bmatrix}-1\\2\end{bmatrix}=\begin{bmatrix}0\\3\end{bmatrix}
+  x\begin{bmatrix}2\\ -1\end{bmatrix}+y\begin{bmatrix}-1\\ 2\end{bmatrix}=\begin{bmatrix}0\\ 3\end{bmatrix}
   $$
   用图来解释
 
   <img src='https://markdownfoto-1252952266.cos.ap-guangzhou.myqcloud.com/wizNote/figure_2.svg' width=70%>
 
-  其中，$\begin{bmatrix}2\\-1\end{bmatrix}$ 即 col1, $\begin{bmatrix}-1\\2\end{bmatrix}$ 即 col2，而 两个向量的线性组合，得到了最终的目标向量
+  其中，$\begin{bmatrix}2\\ -1\end{bmatrix}$ 即 col1, $\begin{bmatrix}-1\\ 2\end{bmatrix}$ 即 col2，而 两个向量的线性组合，得到了最终的目标向量
 
 
-来看下3D的情况，假设有方程组：
+来看下3D的情况，假设有方程组：  
 $$
 \label 4
 \left\{\begin{array}{}
