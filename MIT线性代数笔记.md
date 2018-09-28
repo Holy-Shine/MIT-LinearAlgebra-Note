@@ -1,7 +1,8 @@
 # MIT线性代数笔记
 - [第1课-方程组的几何解释](#第1课-方程组的几何解释)  
 - [第2课-矩阵消元](#第2课-矩阵消元)  
-- [第3课-矩阵乘法和可逆矩阵](#第3课-矩阵乘法和可逆矩阵)  
+- [第3课-矩阵乘法和可逆矩阵](#第3课-矩阵乘法和可逆矩阵)
+- [第4课-LU分解](#第4课-LU分解)
 
 
 
@@ -127,6 +128,7 @@ $$
 
 
 
+
 - **过程2**:
 
   1，2 行不动，第3行为第3行减去两倍的第二行，则：
@@ -134,6 +136,7 @@ $$
   \notag
   E_{3,2}=\begin{bmatrix}1&0&0\\0&1&0\\0&-2&1\end{bmatrix}, E_{2,1}\times \begin{bmatrix}1&2&1\\0&2&-2\\0&4&1\end{bmatrix}=\begin{bmatrix}1&2&1\\0&2&-2\\0&0&5\end{bmatrix}=U
   $$
+
 
 
 
@@ -219,6 +222,7 @@ $$
 
 
 
+
 ## 3.2 逆
 
 先来讨论方阵的情况。
@@ -271,3 +275,43 @@ $$
 E'[A,I]=[I,E']
 $$
 $E'A=I\Rightarrow E'=A^{-1}$
+
+# 第4课-LU分解
+
+LU分解：（Lower and Upper）即将一个矩阵分解为上三角和下三角矩阵的乘积
+
+## 4.1 低维的情况
+
+- **二维的情况**
+
+  简单起见，先考虑2维的情况。考虑矩阵 $A$ 的变换，目标是获得一个上三角阵，即需要确定2个主元，$E_{21}A=U$ (2,1)表示对该位置元素的变换
+  $$
+  \begin{bmatrix}1&0\\-4 & 1\end{bmatrix}\begin{bmatrix}2&1\\8 & 7\end{bmatrix}=\begin{bmatrix}2&1\\0 & 3\end{bmatrix}
+  $$
+  转化为 $A=LU$ 的形式：
+  $$
+  \begin{bmatrix}2&1\\8 & 7\end{bmatrix}=\begin{bmatrix}1&0\\4 & 1\end{bmatrix}\begin{bmatrix}2&1\\0 & 3\end{bmatrix}
+  $$
+  事实上，还可以进一步转换为 $A=LDU$ 的形式，$D$ 是一个对角阵：
+  $$
+  \begin{bmatrix}2&1\\8 & 7\end{bmatrix}=\begin{bmatrix}1&0\\4 & 1\end{bmatrix}\begin{bmatrix}2&\\ & 3\end{bmatrix}\begin{bmatrix}1&\frac{1}{2}\\ 0& 1\end{bmatrix}
+  $$
+
+- **三维的情况**
+
+  对于三维的情况，矩阵$A$ 需要确定3个主元，则需要左乘初等矩阵达到目的。假设没有行变换，并且：
+  $$
+  E_{32}E_{31}E_{21}A=U
+  $$
+  显然 $A=E_{21}^{-1}E_{31}^{-1}E_{32}^{-1}U=LU$
+
+
+## 4.2 置换矩阵
+
+考虑三维的情况，所有的置换阵罗列如下：
+$$
+\underbrace{\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}}_{\text{不交换}},\underbrace{\begin{bmatrix}0&1&0\\1&0&0\\0&0&1\end{bmatrix},\begin{bmatrix}0&0&1\\0&1&0\\1&0&0\end{bmatrix},\begin{bmatrix}1&0&0\\0&0&1\\0&1&0\end{bmatrix}}_{交换两行},\underbrace{\begin{bmatrix}0&0&1\\1&0&0\\0&1&0\end{bmatrix},\begin{bmatrix}0&1&0\\0&0&1\\1&0&0\end{bmatrix}}_{交换3行}
+$$
+这些矩阵组成的群中，任意两个相乘的结果任然在群中(连续两次行变换组合肯定还是行变换)，且群大小为 $n!$
+
+对于置换阵，有$P^{-1}=P^T​$
