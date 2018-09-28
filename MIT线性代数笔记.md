@@ -169,6 +169,7 @@ E_{2,1}^{-1}=\begin{bmatrix}1&0&0\\3&1&0\\0&0&1\end{bmatrix}
 $$
 
 
+
  # 第3课-矩阵乘法和可逆矩阵
 
 ## 3.1 矩阵乘法的5种描述
@@ -218,10 +219,6 @@ $$
   $$
   \begin{bmatrix}A_1 & A_2 \\A_3 & A_4 \end{bmatrix}\begin{bmatrix}B_1 & B_2 \\B_3 & B_4 \end{bmatrix}=\begin{bmatrix}A_1B_1+A_2B_3 &..  \\ ..& .. \end{bmatrix}
   $$
-
-
-
-
 
 
 
