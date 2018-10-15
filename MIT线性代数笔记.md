@@ -5,6 +5,7 @@
 - [第4课-LU分解](#第4课-LU分解)
 - [第5课-转置置换和向量空间](#第5课-转置置换和向量空间)
 - [第6课-列空间和零空间](#第6课-列空间和零空间)
+- [第7课-求解Ax=0:主变量&特解](#第7课-求解Ax=0:主变量&特解)
 
 
 
@@ -135,6 +136,8 @@ $$
 
 
 
+
+
 - **过程2**:
 
   1，2 行不动，第3行为第3行减去两倍的第二行，则：
@@ -142,6 +145,8 @@ $$
   \notag
   E_{3,2}=\begin{bmatrix}1&0&0\\0&1&0\\0&-2&1\end{bmatrix}, E_{2,1}\times \begin{bmatrix}1&2&1\\0&2&-2\\0&4&1\end{bmatrix}=\begin{bmatrix}1&2&1\\0&2&-2\\0&0&5\end{bmatrix}=U
   $$
+
+
 
 
 
@@ -227,6 +232,8 @@ $$
   $$
   \begin{bmatrix}A_1 & A_2 \\A_3 & A_4 \end{bmatrix}\begin{bmatrix}B_1 & B_2 \\B_3 & B_4 \end{bmatrix}=\begin{bmatrix}A_1B_1+A_2B_3 &..  \\ ..& .. \end{bmatrix}
   $$
+
+
 
 
 
@@ -421,3 +428,75 @@ $$
 形如 $\begin{bmatrix}c\\c\\-c\end{bmatrix}$ 的向量，都是方程组的解。即 $N(A)$ 是 $R^3$ 空间中的一条直线。
 
 > 向量空间必须包含零点，离开零点则不构成向量空间。根据定义，对于空间中的任意向量 $v$， $-v+v$ 一定在该空间中，则必然包含零点
+
+# 第7课-求解Ax=0:主变量&特解
+
+本节来讲如何求解 $Ax=0$， 即 矩阵$A$ 的零空间。一般过程为消元(**消元不改变方程解，即不改变矩阵零空间**)
+
+假定矩阵 $A$:
+$$
+A=\begin{bmatrix}1&2&2&2\\2&4&6&8\\3&6&8&10\end{bmatrix}
+$$
+首先可以看到矩阵 $A$ 的第三行可以由1，2两行相加得到，$A$ 的有效行为2，因此在消元过程中会出现主元缺失的情况。
+
+## 7.1 Step1-消元
+
+$A$ 的消元过程如下：
+$$
+\begin{bmatrix}1&2&2&2\\2&4&6&8\\3&6&8&10\end{bmatrix}\Rightarrow^1\begin{bmatrix}\textbf{1}&2&2&2\\0&0&\textbf{2}&4\\0&0&2&4\end{bmatrix}\Rightarrow^2\begin{bmatrix}\textbf{1}&2&2&2\\0&0&\textbf{2}&4\\0&0&0&0\end{bmatrix}=U
+$$
+加粗的为矩阵主元。
+
+> 在求解第二个主元的时候，发现第二列主元位置为0，用行交换也无法获得非零主元，则可知道**第2列是前面列的线性组合**(待证明)。
+
+我们发现矩阵 $A$ 的主元数为2，即矩阵 $A$ 的秩(Rank) $r(A)=2$
+
+## 7.2 Step2-主列和自由列
+
+主元所在列称为主列，其余的为自由列，对于自由列的变量，我们可以自由赋值，即对于消元后的方程组：
+$$
+\left\{ 
+\begin{array}{}
+x_1+2x_2+&2x_3+2x_4&=0\\
+&2x_3+4x_4&=0
+\end{array}\right.
+$$
+同过取$\left\{ 
+\begin{array}{}
+x_2&=1\\
+x_4&=0
+\end{array}\right.$和$\left\{ 
+\begin{array}{}
+x_2&=0\\
+x_4&=1
+\end{array}\right.$ 我们可以得到方程的两个特解：
+$$
+\textbf{x}_1=\begin{bmatrix}2\\1\\0\\0\end{bmatrix},\textbf{x}_2=\begin{bmatrix}2\\0\\-2\\1\end{bmatrix}
+$$
+两个特解都在矩阵 $A$ 的零空间中，则 $A$ 的解集(零空间)为：
+$$
+N(A)=c\begin{bmatrix}2\\1\\0\\0\end{bmatrix}+d\begin{bmatrix}2\\0\\-2\\1\end{bmatrix}
+$$
+其中 $c,d$ 为任意实数。
+
+> 我们看到，对于 $m\times n$ 的秩为 $r$ 的 矩阵，自由变量的个数为 $n-r$ 
+
+## 7.3 简化行阶梯形式
+
+$A$ 的最终化简结果$U$为行阶梯形式，事实上可以进一步化简，使得：
+
+- 主元都是1
+- 主元上下方为0
+
+化简的最终形式我们称之为简化行阶梯形式，记作为 $R$
+
+化简过程如下：
+$$
+U=\begin{bmatrix}\textbf{1}&2&2&2\\0&0&\textbf{2}&4\\0&0&0&0\end{bmatrix}\Rightarrow^1\begin{bmatrix}\textbf{1}&2&0&-2\\0&0&\textbf{2}&4\\0&0&2&4\end{bmatrix}\Rightarrow^2\begin{bmatrix}\textbf{1}&2&0&-2\\0&0&\textbf{1}&2\\0&0&0&0\end{bmatrix}=R
+$$
+此时矩阵 $R$ 的主列即单位矩阵 $I$ , 而自由列我们记为 $F​$（Free）。
+
+原方程的形式$ Ux=0$ 转化为了 $Rx=0$， 即：
+$$
+R=\begin{bmatrix}I&F\\0&0\end{bmatrix}, RN(A)=0\Rightarrow N(A)=\begin{bmatrix}-F\\I\end{bmatrix}
+$$
