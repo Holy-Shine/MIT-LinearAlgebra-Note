@@ -6,6 +6,7 @@
 - [第5课-转置置换和向量空间](#第5课-转置置换和向量空间)
 - [第6课-列空间和零空间](#第6课-列空间和零空间)
 - [第7课-求解Ax=0:主变量&特解](#第7课-求解Ax=0:主变量&特解)
+- [第8课-可解性和解的结构](#第8课-可解性和解的结构)
 
 
 
@@ -139,6 +140,10 @@ $$
 
 
 
+
+
+
+
 - **过程2**:
 
   1，2 行不动，第3行为第3行减去两倍的第二行，则：
@@ -146,6 +151,10 @@ $$
   \notag
   E_{3,2}=\begin{bmatrix}1&0&0\\0&1&0\\0&-2&1\end{bmatrix}, E_{2,1}\times \begin{bmatrix}1&2&1\\0&2&-2\\0&4&1\end{bmatrix}=\begin{bmatrix}1&2&1\\0&2&-2\\0&0&5\end{bmatrix}=U
   $$
+
+
+
+
 
 
 
@@ -234,6 +243,10 @@ $$
   $$
   \begin{bmatrix}A_1 & A_2 \\A_3 & A_4 \end{bmatrix}\begin{bmatrix}B_1 & B_2 \\B_3 & B_4 \end{bmatrix}=\begin{bmatrix}A_1B_1+A_2B_3 &..  \\ ..& .. \end{bmatrix}
   $$
+
+
+
+
 
 
 
@@ -482,7 +495,7 @@ N(A)=c\begin{bmatrix}2\\1\\0\\0\end{bmatrix}+d\begin{bmatrix}2\\0\\-2\\1\end{bma
 $$
 其中 $c,d$ 为任意实数。
 
-> 我们看到，对于 $m\times n$ 的秩为 $r$ 的 矩阵，自由变量的个数为 $n-r$ 
+> 我们看到，对于 $m\times n$ 的秩为 $r$ 的 矩阵，自由变量的个数为 $n-r​$ 
 
 ## 7.3 简化行阶梯形式
 
@@ -503,3 +516,138 @@ $$
 $$
 R=\begin{bmatrix}I&F\\0&0\end{bmatrix}, RN(A)=0\Rightarrow N(A)=\begin{bmatrix}-F\\I\end{bmatrix}
 $$
+
+
+
+# 第8课-可解性和解的结构
+
+## 8.1 可解性
+
+考虑方程和对应的增广矩阵：
+$$
+\left \{
+\begin{array}{}
+x_1+2x_2+2x_3+2x_4 &=b_1\\
+2x_1+4x_2+6x_3+8x_4 &=b_2\\
+3x_1+6x_2+8x_3+10x_4 &=b_3\\
+\end{array}
+\right.\Rightarrow^{\text{augmented matrix}}
+\begin{bmatrix}
+1&2&2&2&b_1\\
+2&4&6&8&b_2\\
+3&6&8&10&b_3\\
+\end{bmatrix}
+$$
+其中：
+$$
+A=\begin{bmatrix}
+1&2&2&2\\
+2&4&6&8\\
+3&6&8&10\\
+\end{bmatrix},
+x=\begin{bmatrix}
+x_1\\
+x_2\\
+x_3\\
+x_4\\
+\end{bmatrix}
+b=\begin{bmatrix}
+b_1\\
+b_2\\
+b_3\\
+\end{bmatrix}
+$$
+
+
+为了求解 $Ax=b$ 我们需要对增广阵进行消元。
+
+消元结果如下(加粗为矩阵主元)：
+$$
+\begin{bmatrix}
+\textbf{1}&2&2&2&b_1\\
+0&0&\textbf{2}&4&b_2-2b_1\\
+0&0&0&0&b_3-b_2-b_1\\
+\end{bmatrix}
+$$
+若希望方程有解，则显然需要满足 $b_3-b_2-b_1=0$
+
+又有：全0行表示消元前第三行可以由其他行线性组合得到，所以可知：
+
+**若$A$的其他行线性组合得到0，则相应位置的 $b$ 进行相应的线性组合也要等于0**
+
+> 我们同样可以用列空间的概率来讨论可解性的问题：
+>
+> **仅当 $b$ 在 $A$ 的列空间内($b\in C(A)$)** 才有解
+
+## 8.2 全解的形式
+
+全解的求解步骤：
+
+- 找一个特解$x_p$
+  - 置所有自由变量(所在列无主元)为0
+  - 解出 $Ax=b$ 中的主变量
+- 求出$A$的零空间$N(A)$,事实上，这个就是齐次线性方程组的**基础解系**。
+
+则方程的全解为特解+零空间的任意向量，即： $x_p+N(A)$
+
+> **证明：**
+>
+> $Ax_p=b, Ax_n = 0\Rightarrow A(x_p+x_n)=b$
+
+运用上述步骤，我们求解章节初的方程。
+
+**① 找一个特解**
+
+令 $x_2=x_4=0$ 得到 $\left \{
+\begin{array}{}
+x_1+&2x_3 &=1\\
+&2x_3&=3\\
+\end{array}
+\right.$，解得 $x_p=\begin{bmatrix}-2\\0\\3/2\\0\end{bmatrix}$
+
+**② 零空间**
+
+对于自由变量，分别取0，1和1，0（上一节讲过），得到零空间一组基向量，得到：
+$$
+N(A)=c_1\begin{bmatrix}-2\\1\\0\\0\end{bmatrix}+c_2\begin{bmatrix}-2\\0\\-2\\1\end{bmatrix}
+$$
+则全解：
+$$
+x_{\text{complete}}=\begin{bmatrix}-2\\0\\3/2\\0\end{bmatrix}+c_1\begin{bmatrix}-2\\1\\0\\0\end{bmatrix}+c_2\begin{bmatrix}-2\\0\\-2\\1\end{bmatrix}
+$$
+零空间为 $R^4$ 中一个二维平面，则全解也是一个二维平面(但不是子空间，因为不过原点)
+
+
+
+## 8.3 秩对解的影响
+
+总共有4种情况。
+
+考虑$A^{m\times n}$，$A$的秩为 $\text{rank}(A)=r$。
+
+**① $r=n<m$**
+
+即每一列都有主元，此时自由变量个数为0，即零空间(基础解系)只有一个零点，根据全解构成，直到此时有一个或0个解。
+
+例如：$A=\begin{bmatrix}1&3\\3&1\\6&1\\5&1\end{bmatrix}$， 其简化行阶梯(rref)形式为$R=\begin{bmatrix}1&0\\0&1\\0&0\\0&0\end{bmatrix}=\begin{bmatrix}I\\F\end{bmatrix}$
+
+当3，4列的 $b$ 不为 0 的时候，方程无解，若均为0，则必有解。
+
+**② $r=m<n$**
+
+即每一行都有主元，此时自由变量个数为 $n-r=n-m$，此时方程必有无穷个解
+
+例如：$A=\begin{bmatrix}1&2&6&5\\3&1&1&1\end{bmatrix}$，简化行阶梯形式为$R=\begin{bmatrix}1&0&F\\0&1&F\end{bmatrix}$，无论 $b$ 为何值，都能通过自由变量的取值得到相应的解。
+
+**③ $r=m=n$**
+
+满秩，则矩阵可逆，显然有 $x=A^{-1}b$ 有唯一解。同时其简化行阶梯形式即为单位矩阵 $I$, 表明其零空间为0
+
+**④ $r<m,r<n$**
+
+此时$R=\begin{bmatrix}I&F\\0&0\end{bmatrix}$
+
+若满足全0行，则有无穷个解，否则无解。
+
+
+
